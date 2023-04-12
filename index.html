@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>MBTI Test</title>
+  <style>
+    /* CSS styles for the form and result */
+    form {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+    input[type="radio"] {
+      margin-right: 5px;
+    }
+    #result {
+      font-size: 24px;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+<h1>길비티아이!</h1>
+<form id="mbti-form">
+  <p>자유시간을 보낼 때, 무엇을 선호하시나요?</p>
+  <label>
+    <input type="radio" name="q1" value="a">
+    책을 읽는 것
+  </label>
+  <label>
+    <input type="radio" name="q1" value="b">
+    TV를 보는 것
+  </label>
+
+  <p>일을 할 때, 무엇에 더 집중하시나요?</p>
+  <label>
+    <input type="radio" name="q2" value="a">
+    세부 사항
+  </label>
+  <label>
+    <input type="radio" name="q2" value="b">
+    전반적인 그림
+  </label>
+
+  <p>일할 때, 어떤 것을 선호하시나요?</p>
+  <label>
+    <input type="radio" name="q3" value="a">
+    혼자 일하는 것
+  </label>
+  <label>
+    <input type="radio" name="q3" value="b">
+    팀으로 일하는 것
+  </label>
+
+  <p>계획을 세울 때, 무엇을 선호하시나요?</p>
+  <label>
+    <input type="radio" name="q4" value="a">
+    계획에 따라 일하기
+  </label>
+  <label>
+    <input type="radio" name="q4" value="b">
+    즉흥적으로 일하기
+  </label>
+
+  <p>에너지를 더 많이 느끼시는 상황은 어떤 것인가요?</p>
+  <label>
+    <input type="radio" name="q5" value="a">
+    사람들과 함께 할 때
+  </label>
+  <label>
+    <input type="radio" name="q5" value="b">
+    혼자 있을 때
+  </label>
+
+  <p>무엇을 선호하시나요?</p>
+  <label>
+    <input type="radio" name="q6" value="a">
+    규칙을 따르는 것
+  </label>
+  <label>
+    <input type="radio" name="q6" value="b">
+    규칙을 어기는 것
+  </label>
+
+  <p>결정을 내릴 때, 무엇에 더 의존하시나요?</p>
+  <label>
+    <input type="radio" name="q7" value="a">
+    논리
+  </label>
+  <label>
+    <input type="radio" name="q7" value="b">
+    감정
+  </label>
+
+  <p>앞으로 일을 할 때, 어떤 것을 선호하시나요?</p>
+  <label>
+    <input type="radio" name="q8" value="a">
+    계획에 따라 미리 준비하기
+  </label>
+  <label>
+    <input type="radio" name="q8" value="b">
+    상황에 맞춰 대처하기
+  </label>
+
+  <p>일할 때, 무엇을 더 선호하시나요?</p>
+  <label>
+    <input type="radio" name="q9" value="a">
+    팀원들과 함께 일하기
+  </label>
+  <label>
+    <input type="radio" name="q9" value="b">
+    독자적으로 혼자 일하기
+  </label>
+
+  <p>일상 생활에서 무엇을 더 선호하시나요?</p>
+  <label>
+    <input type="radio" name="q10" value="a">
+    익숙한 루틴에서 살기
+  </label>
+  <label>
+    <input type="radio" name="q10" value="b">
+    새로운 도전과 경험을 추구하기
+  </label>
+
+  <p>감정적으로 안정적인 편인가요?</p>
+  <label>
+    <input type="radio" name="q11" value="a">
+    예
+  </label>
+  <label>
+    <input type="radio" name="q11" value="b">
+    아니오
+  </label>
+
+  <p>대화에서 어떤 태도를 더 선호하시나요?</p>
+  <label>
+    <input type="radio" name="q12" value="a">
+    많이 말하기
+  </label>
+  <label>
+    <input type="radio" name="q12" value="b">
+    조용히 듣기
+  </label>
+
+  <button type="submit">결과 확인</button>
+</form>
+<div id="result"></div>
+
+<script>
+  const form = document.getElementById('mbti-form');
+  const result = document.getElementById('result');
+
+  // An array of objects that contains the questions and the scores
+  const questions = [
+    { question: '자유시간을 보낼 때, 무엇을 선호하시나요?', a: 4, b: 0 },
+    { question: '일을 할 때, 무엇에 더 집중하시나요?', a: 0, b: 4 },
+    { question: '일할 때, 어떤 것을 선호하시나요?', a: 4, b: 0 },
+    { question: '계획을 세울 때, 무엇을 선호하시나요?', a: 0, b: 4 },
+    { question: '에너지를 더 많이 느끼시는 상황은 어떤 것인가요?', a: 4, b: 0 },
+    { question: '무엇을 선호하시나요?', a: 0, b: 4 },
+    { question: '결정을 내릴 때, 무엇에 더 의존하시나요?', a: 0, b: 4 },
+    { question: '앞으로 일을 할 때, 어떤 것을 선호하시나요?', a: 4, b: 0 },
+    { question: '일할 때, 무엇을 더 선호하시나요?', a: 4, b: 0 },
+    { question: '일상 생활에서 무엇을 더 선호하시나요?', a: 0, b: 4 },
+    { question: '감정적으로 안정적인 편인가요?', a: 4, b: 0 },
+    { question: '대화에서 어떤 태도를 더 선호하시나요?', a: 0, b: 4 }
+  ];
+
+  // An object to store the scores
+  const scores = { a: 0, b: 0 };
+
+  // Add an event listener to the form submission
+  form.addEventListener('submit', (event) => {
+    event.preventDefault(); // Prevent the form from submitting
+
+    // Loop through the questions and add up the scores
+    questions.forEach((q, index) => {
+      const answer = form.elements[`q${index + 1}`].value;
+      scores[answer] += q[answer];
+    });
+
+    // Calculate the MBTI results based on the scores
+    const mbti = {
+      I: scores.a + scores.b > 20 ? 'I' : 'E',
+      N: scores.a + scores.b > 16 ? 'N' : 'S',
+      F: scores.a + scores.b > 24 ? 'F' : 'T',
+      P: scores.a + scores.b > 20 ? 'P' : 'J'
+    };
+
+    // Display the MBTI results on the webpage
+    result.textContent = `당신의 MBTI 유형은 ${mbti.I}${mbti.N}${mbti.F}${mbti.P} 입니다.`;
+  });
+</script>
+</body>
+</html>
