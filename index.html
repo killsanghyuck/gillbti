@@ -121,7 +121,8 @@ const questions = [
   }
 
   function chooseOption(option) {
-    scores[currentIndex % 4] += option;
+    const dimensionIndex = Math.floor(currentIndex / 6);
+    scores[dimensionIndex] += option;
     currentIndex++;
 
     if (currentIndex < questions.length) {
@@ -131,6 +132,7 @@ const questions = [
         document.getElementsByClassName('question-container')[0].style.display = 'none';
     }
 }
+
 
 
   function showResults() {
