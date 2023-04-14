@@ -122,33 +122,33 @@
     let result = '';
 
     if (scores[0] > scores[1]) {
-      result += 'E';
+        result += 'E';
     } else {
-      result += 'I';
+        result += 'I';
     }
 
     if (scores[2] > scores[3]) {
-      result += 'S';
+        result += 'S';
     } else {
-      result += 'N';
+        result += 'N';
     }
 
-    if (scores[0] > scores[2]) {
-      result += 'T';
+    if (scores[0] % 2 === 0) {
+        result += 'T';
     } else {
-      result += 'F';
+        result += 'F';
     }
 
-    if (scores[1] > scores[3]) {
-      result += 'J';
+    if (scores[2] % 2 === 0) {
+        result += 'J';
     } else {
-      result += 'P';
+        result += 'P';
     }
 
     document.getElementById('view-results').style.display = 'none';
     document.getElementById('results').style.display = 'block';
     document.getElementById('results').textContent = '당신의 MBTI 결과: ' + result;
-  }
+}
 
   renderQuestion();
 </script>
