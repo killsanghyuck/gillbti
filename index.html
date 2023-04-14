@@ -82,20 +82,34 @@
 <div id="results" class="results"></div>
 
 <script>
-  const questions = [
+const questions = [
     ['사람들과 함께 있으면 에너지를 얻는다', '혼자 있는 시간이 더 에너지를 얻는다'],
-    ['일상적이고 구체적인 정보를 선호한다', '추상적이고 이론적인 정보를 선호한다'],
-    ['감정적이고 따뜻한 일을 선호한다', '논리적이고 분석적인 일을 선호한다'],
-    ['계획을 세우고 실행하는 것을 좋아한다', '유연하게 일정을 조정하는 것을 좋아한다'],
     ['새로운 사람들을 만나기를 즐긴다', '친한 친구와 시간을 보내기를 즐긴다'],
-    ['현실적인 문제 해결에 관심이 많다', '미래의 가능성에 대해 고민하는 것이 흥미롭다'],
-    ['이해하기 쉽고 친절한 사람으로 인식된다', '철저하고 논리적인 사람으로 인식된다'],
-    ['시간표를 명확하게 정리하는 것을 선호한다', '계획을 유연하게 조정하는 것을 선호한다'],
+    ['많은 사람들이 참석한 모임에 참여하기를 좋아한다', '소수의 친한 친구와 모임을 가지는 것을 선호한다'],
     ['주변 사람들과 얘기를 나누며 생각을 정리한다', '혼자 생각하며 문제를 해결하는 것을 좋아한다'],
-    ['구체적인 사실과 정보를 기반으로 판단한다', '직감과 상상력을 기반으로 판단한다'],
     ['타인과 협력하여 목표를 달성하는 것을 선호한다', '독립적으로 일하여 목표를 달성하는 것을 선호한다'],
-    ['마감일에 맞추어 일을 진행하는 것을 좋아한다', '마지막 순간에 에너지가 집중되어 일을 하는 것을 좋아한다']
-  ];
+    ['외향적인 성격을 가졌다고 생각한다', '내향적인 성격을 가졌다고 생각한다'],
+    ['일상적이고 구체적인 정보를 선호한다', '추상적이고 이론적인 정보를 선호한다'],
+    ['현실적인 문제 해결에 관심이 많다', '미래의 가능성에 대해 고민하는 것이 흥미롭다'],
+    ['구체적인 사실과 정보를 기반으로 판단한다', '직감과 상상력을 기반으로 판단한다'],
+    ['현실적인 해결책을 찾는 것이 중요하다고 생각한다', '창의적인 해결책을 찾는 것이 중요하다고 생각한다'],
+    ['사실에 기반한 명확한 답변을 선호한다', '가능성을 열어두는 답변을 선호한다'],
+    ['실제 경험에 더 가치를 두는 편이다', '이론과 개념에 더 가치를 두는 편이다'],
+    ['감정적이고 따뜻한 일을 선호한다', '논리적이고 분석적인 일을 선호한다'],
+    ['이해하기 쉽고 친절한 사람으로 인식된다', '철저하고 논리적인 사람으로 인식된다'],
+    ['타인의 감정에 공감하는 것이 자연스럽다', '객관적인 분석이 더 자연스럽다'],
+    ['사람들과 함께 일할 때 이성적으로 판단하는 것이 중요하다', '사람들과 함께 일할 때 감정을 고려하는 것이 중요하다'],
+    ['결정을 내릴 때 논리와 분석을 중요시한다', '결정을 내릴 때 가치와 감정을 중요시한다'],
+    ['정확한 정보와 논리를 기반으로 의사결정을 하는 것이 중요하다', '타인의 관점과 감정을 고려하는 것이 중요하다'],
+    ['계획을 세우고 실행하는 것을 좋아한다', '유연하게 일정을 조정하는 것을 좋아한다'],
+    ['시간표를 명확하게 정리하는 것을 선호한다', '계획을 유연하게 조정하는 것을 선호한다'],
+    ['마감일에 맞추어 일을 진행하는 것을 좋아한다', '마지막 순간에 에너지가 집중되어 일을 하는 것을 좋아한다'],
+    ['목표를 세우고 그에 따라 일정을 정확하게 계획한다', '일정을 유동적으로 조정하며 목표를 달성한다'],
+    ['진행 중인 일에 대해 철저한 계획과 준비를 선호한다', '진행 중인 일에 대해 유연하게 대처하고 즉흥적으로 처리한다'],
+    ['일을 시작하기 전에 철저한 준비를 하는 것이 중요하다고 생각한다', '일을 시작하면서 조금씩 계획을 수정하는 것이 중요하다고 생각한다']
+];
+
+
 
   let currentIndex = 0;
   let scores = [0, 0, 0, 0];
@@ -111,35 +125,38 @@
     currentIndex++;
 
     if (currentIndex < questions.length) {
-      renderQuestion();
+        renderQuestion();
     } else {
-      document.getElementById('view-results').style.display = 'block';
-      document.getElementsByClassName('question-container')[0].style.display = 'none';
+        document.getElementById('view-results').style.display = 'block';
+        document.getElementsByClassName('question-container')[0].style.display = 'none';
     }
-  }
+}
+
 
   function showResults() {
     let result = '';
 
-    if (scores[0] > scores[1]) {
+    const numOfQuestionsPerDimension = questions.length / 4;
+
+    if (scores[0] > numOfQuestionsPerDimension / 2) {
         result += 'E';
     } else {
         result += 'I';
     }
 
-    if (scores[2] > scores[3]) {
+    if (scores[1] > numOfQuestionsPerDimension / 2) {
         result += 'S';
     } else {
         result += 'N';
     }
 
-    if (scores[0] % 2 === 0) {
+    if (scores[2] > numOfQuestionsPerDimension / 2) {
         result += 'T';
     } else {
         result += 'F';
     }
 
-    if (scores[2] % 2 === 0) {
+    if (scores[3] > numOfQuestionsPerDimension / 2) {
         result += 'J';
     } else {
         result += 'P';
@@ -149,6 +166,7 @@
     document.getElementById('results').style.display = 'block';
     document.getElementById('results').textContent = '당신의 MBTI 결과: ' + result;
 }
+
 
   renderQuestion();
 </script>
